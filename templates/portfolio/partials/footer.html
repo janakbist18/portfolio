@@ -1,0 +1,14 @@
+<footer class="site-footer mt-5">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
+        <div>
+            <h5 class="mb-1">{{ profile.name|default:'Portfolio' }}</h5>
+            <p class="mb-0 text-muted">Enterprise-ready backend systems and product engineering.</p>
+        </div>
+        <div class="d-flex gap-3">
+            {% if profile.social_github %}<a href="{{ profile.social_github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+            {% if profile.social_linkedin %}<a href="{{ profile.social_linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+            {% if profile.social_twitter %}<a href="{{ profile.social_twitter }}" target="_blank" rel="noopener">Twitter</a>{% endif %}
+            {% if profile.social_email %}<a href="mailto:{{ profile.social_email }}">Email</a>{% endif %}
+        </div>
+    </div>
+</footer>

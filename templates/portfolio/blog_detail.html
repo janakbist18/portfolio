@@ -1,0 +1,22 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+    <div class="container">
+        <a class="btn btn-link" href="/">← Back to home</a>
+        <div class="blog-detail content-card mt-3">
+            <p class="text-muted">{{ post.created_at|date:'M d, Y' }}</p>
+            <h1 class="mb-3">{{ post.title }}</h1>
+            {% if post.image %}
+                <img class="img-fluid rounded-4 mb-4" src="{{ post.image.url }}" alt="{{ post.title }}" />
+            {% endif %}
+            <div class="post-content">
+                {{ post.content|linebreaks }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

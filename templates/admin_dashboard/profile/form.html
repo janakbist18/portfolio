@@ -1,0 +1,28 @@
+{% extends 'admin_dashboard/base.html' %}
+
+{% block page_title %}Profile{% endblock %}
+
+{% block content %}
+<div class="card panel-card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row g-3">
+                <div class="col-md-6">{{ form.name.label_tag }}{{ form.name }}</div>
+                <div class="col-md-6">{{ form.role.label_tag }}{{ form.role }}</div>
+                <div class="col-12">{{ form.bio.label_tag }}{{ form.bio }}</div>
+                <div class="col-md-6">{{ form.image.label_tag }}{{ form.image }}</div>
+                <div class="col-md-6">{{ form.cv.label_tag }}{{ form.cv }}</div>
+                <div class="col-12">{{ form.skills.label_tag }}{{ form.skills }}</div>
+                <div class="col-md-6">{{ form.social_github.label_tag }}{{ form.social_github }}</div>
+                <div class="col-md-6">{{ form.social_linkedin.label_tag }}{{ form.social_linkedin }}</div>
+                <div class="col-md-6">{{ form.social_twitter.label_tag }}{{ form.social_twitter }}</div>
+                <div class="col-md-6">{{ form.social_email.label_tag }}{{ form.social_email }}</div>
+                <div class="col-md-6">{{ form.social_website.label_tag }}{{ form.social_website }}</div>
+            </div>
+            <button class="btn btn-primary mt-4" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

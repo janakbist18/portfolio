@@ -1,0 +1,16 @@
+<aside class="dashboard-sidebar">
+    <div class="brand">
+        <span class="brand-mark">◎</span>
+        <span class="brand-name">Studio Admin</span>
+    </div>
+    <nav class="nav flex-column">
+        <a class="nav-link" href="{% url 'admin_dashboard:dashboard' %}"><i class="bi bi-grid"></i> Overview</a>
+        <a class="nav-link" href="{% url 'admin_dashboard:profile' %}"><i class="bi bi-person"></i> Profile</a>
+        <a class="nav-link" href="{% url 'admin_dashboard:projects' %}"><i class="bi bi-folder2-open"></i> Projects</a>
+        <a class="nav-link" href="{% url 'admin_dashboard:blog' %}"><i class="bi bi-journal-text"></i> Blog</a>
+        <a class="nav-link" href="{% url 'admin_dashboard:messages' %}"><i class="bi bi-chat-left-text"></i> Messages</a>
+    </nav>
+    <div class="sidebar-footer">
+        <a class="btn btn-outline-light btn-sm w-100" href="{% url 'admin_dashboard:logout' %}">Log out</a>
+    </div>
+</aside>

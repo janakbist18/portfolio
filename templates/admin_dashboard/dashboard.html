@@ -1,0 +1,58 @@
+{% extends 'admin_dashboard/base.html' %}
+
+{% block page_title %}Overview{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="metric-card">
+            <p>Projects</p>
+            <h2>{{ project_count }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card">
+            <p>Blog Posts</p>
+            <h2>{{ blog_count }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card">
+            <p>Messages</p>
+            <h2>{{ message_count }}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-1">
+    <div class="col-lg-7">
+        <div class="card panel-card">
+            <div class="card-body">
+                <h3 class="h6">Engagement</h3>
+                <canvas id="messageChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card panel-card">
+            <div class="card-body">
+                <h3 class="h6">Latest Messages</h3>
+                <ul class="list-unstyled mb-0">
+                    {% for message in latest_messages %}
+                        <li class="message-item">
+                            <strong>{{ message.name }}</strong>
+                            <span class="text-muted small">{{ message.created_at|date:'M d, Y' }}</span>
+                            <p class="mb-0">{{ message.message|truncatechars:90 }}</p>
+                        </li>
+                    {% empty %}
+                        <li class="text-muted">No messages yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ chart_labels|json_script:"chart-labels" }}
+{{ chart_data|json_script:"chart-data" }}
+{% endblock %}

@@ -1,0 +1,305 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ profile.name|default:'Portfolio' }}{% endblock %}
+
+{% block content %}
+<header class="hero-section">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7" data-aos="fade-right">
+                <p class="eyebrow">{{ profile.role|default:'Backend Engineer' }}</p>
+                <h1 class="hero-title">{{ profile.name|default:'Your Name' }}</h1>
+                <p class="hero-subtitle">{{ profile.bio|default:"I build reliable backend systems and product-focused web experiences for teams that ship real operations." }}</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="#contact">Backend Developer</a>
+                    <a class="btn btn-outline-secondary btn-lg" href="#projects">View Projects</a>
+                    {% if profile.cv %}
+                        <a class="btn btn-cv btn-lg" href="{{ profile.cv.url }}" target="_blank" rel="noopener">
+                            <span class="cv-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" role="img" focusable="false">
+                                    <path d="M7 3.5h7.5L19 8v12.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" />
+                                    <path d="M14.5 3.5V8H19" />
+                                    <path d="M8.5 12.5h7" />
+                                    <path d="M8.5 15.5h7" />
+                                </svg>
+                            </span>
+                            <span>Download CV</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="hero-card">
+                    {% if profile.image %}
+                        <img class="img-fluid" src="{{ profile.image.url }}" alt="{{ profile.name }}" />
+                    {% else %}
+                        <div class="placeholder-image">Upload a profile photo</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="section-padding" id="positioning">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Positioning</p>
+            <h2 class="section-title">Enterprise-grade execution with product-minded delivery.</h2>
+            <p class="section-subtitle">I work at the intersection of backend architecture, workflow automation, and product outcomes.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="zoom-in">
+                <div class="stat-card">
+                    <p class="stat-label">ERP + SaaS</p>
+                    <h3 class="stat-title">Cross-functional delivery</h3>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-card">
+                    <p class="stat-label">Backend Systems</p>
+                    <h3 class="stat-title">APIs, integrations, and automation</h3>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-card">
+                    <p class="stat-label">Product Delivery</p>
+                    <h3 class="stat-title">From strategy to production</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="section-padding bg-soft">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Featured Projects</p>
+            <h2 class="section-title">Selected work across backend, ERP, and product engineering.</h2>
+        </div>
+        <div class="row g-4">
+            {% for project in projects %}
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="project-card">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+                        {% else %}
+                            <div class="project-placeholder">Add project image</div>
+                        {% endif %}
+                        <div class="project-body">
+                            <h3 class="h5">{{ project.title }}</h3>
+                            <p>{{ project.description|truncatechars:120 }}</p>
+                            <p class="small text-muted">{{ project.tech_stack }}</p>
+                            {% if project.link %}
+                                <a class="btn btn-link" href="{{ project.link }}" target="_blank" rel="noopener">View project →</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="glass-panel">Add your first project from the dashboard.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="services" class="section-padding">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">What I Build</p>
+            <h2 class="section-title">I design and build scalable full-stack applications that solve real-world business problems.</h2>
+            <p class="section-subtitle">My focus is on clean architecture, performance, and systems that grow with user demand.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="zoom-in">
+                <div class="service-card">
+                    <h3 class="h5">Scalable Web Applications</h3>
+                    <p>Modern, responsive applications built with maintainable codebases and strong architecture.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="service-card">
+                    <h3 class="h5">Backend APIs & System Design</h3>
+                    <p>Robust APIs, data modeling, and backend services engineered for speed, security, and scalability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience" class="section-padding">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Experience</p>
+            <h2 class="section-title">Hands-on experience with enterprise ERP operations and product engineering.</h2>
+            <p class="section-subtitle">I work close to the systems that keep finance and operations running while building modern software around them.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="experience-card">
+                    <p class="text-muted small">2023 – Present</p>
+                    <h3 class="h5">Django Backend Engineer</h3>
+                    <p>Building and maintaining backend systems using Django for scalable web applications and production-ready services.</p>
+                    <ul>
+                        <li>Developed REST APIs and backend logic using Django & Django REST Framework.</li>
+                        <li>Designed database models and optimized queries for performance.</li>
+                        <li>Built authentication, authorization, and role-based access systems.</li>
+                        <li>Integrated third-party services and payment/workflow systems.</li>
+                        <li>Handled deployment, debugging, and production-level issue fixing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="experience-card">
+                    <p class="text-muted small">2022 - Present</p>
+                    <h3 class="h5">Product Engineer, Independent Builds</h3>
+                    <p>Designing and shipping SaaS products with modern backends and clear UX.</p>
+                    <ul>
+                        <li>Architecture for multi-tenant SaaS platforms.</li>
+                        <li>APIs and workflows for billing, inventory, and operations.</li>
+                        <li>End-to-end delivery from discovery to deployment.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="section-padding bg-soft">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Skills</p>
+            <h2 class="section-title">Backend, frontend, and enterprise systems expertise.</h2>
+            <p class="section-subtitle">Focused on production-ready delivery, reliable systems, and scalable architecture.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="stack-card">
+                    <h3 class="h6">Backend Development</h3>
+                    <div class="tag-list">
+                        <span>Python</span><span>Django</span><span>Django REST Framework (DRF)</span><span>REST APIs</span>
+                        <span>Authentication & Authorization</span><span>Business Logic Design</span><span>API Integration</span>
+                        <span>System Architecture</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="stack-card">
+                    <h3 class="h6">Frontend Development</h3>
+                    <div class="tag-list">
+                        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive UI Design</span>
+                        <span>Bootstrap</span><span>Basic UI/UX Implementation</span><span>Component-based UI Structure</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="stack-card">
+                    <h3 class="h6">Database & Data Engineering</h3>
+                    <div class="tag-list">
+                        <span>SQL</span><span>PostgreSQL / MySQL</span><span>PL/SQL</span><span>Database Design</span>
+                        <span>Query Optimization</span><span>Data Modeling</span><span>Data Validation & Transformation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="stack-card">
+                    <h3 class="h6">ERP & Enterprise Systems</h3>
+                    <div class="tag-list">
+                        <span>Oracle E-Business Suite (EBS)</span><span>Finance & HR Modules (AP, GL, HRMS)</span>
+                        <span>Enterprise Data Workflows</span><span>System Integration</span>
+                        <span>Production Support</span><span>Business Process Automation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="stack-card">
+                    <h3 class="h6">Tools & Technologies</h3>
+                    <div class="tag-list">
+                        <span>Git & GitHub</span><span>Linux Basics</span><span>Postman</span><span>VS Code</span>
+                        <span>RESTful API Testing</span><span>Deployment Basics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="stack-card">
+                    <h3 class="h6">Infrastructure</h3>
+                    <div class="tag-list">
+                        <span>Docker</span><span>Nginx</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="blog" class="section-padding">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Blog</p>
+            <h2 class="section-title">Insights and behind-the-scenes notes.</h2>
+        </div>
+        <div class="row g-4">
+            {% for post in blogs %}
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="blog-card">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" />
+                        {% else %}
+                            <div class="blog-placeholder">Add blog image</div>
+                        {% endif %}
+                        <div class="blog-body">
+                            <p class="text-muted small">{{ post.created_at|date:'M d, Y' }}</p>
+                            <h3 class="h5">{{ post.title }}</h3>
+                            <p>{{ post.content|truncatechars:120 }}</p>
+                            <a class="btn btn-link" href="{% url 'portfolio:blog_detail' post.pk %}">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12"><div class="glass-panel">Add your first blog post from the dashboard.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section-padding bg-soft">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Contact</p>
+            <h2 class="section-title">Let's build something memorable.</h2>
+        </div>
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="contact-card">
+                    <h3 class="h5">Start a project</h3>
+                    <p>Tell me about your goals. I'll get back within 24 hours.</p>
+                    <ul class="contact-meta">
+                        <li>Strategy sessions</li>
+                        <li>Product design</li>
+                        <li>Development & delivery</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="glass-panel">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">{{ form.name }}</div>
+                        <div class="mb-3">{{ form.email }}</div>
+                        <div class="mb-3">{{ form.message }}</div>
+                        <button class="btn btn-primary w-100" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
